@@ -1,0 +1,275 @@
+<div id="content" class="padding-20">
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <form name="leadCtrl.editForm" ng-submit="leadCtrl.save()" novalidate>
+
+                <!-- COMPANY INFO -->
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-transparent">
+                        <span>
+                            <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Company Information</span>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-7 col-sm-7" ng-class="{'has-error': leadCtrl.hasValidationError('companyName')}">
+                                        <label>Company Name *</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="text" name="companyName" ng-model="leadCtrl.lead.company.name" class="form-control"
+                                            required>
+                                        <span ng-show="leadCtrl.showValidationError('companyName', 'required')" class="help-block">*Required Field</span>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5" ng-class="{'has-error': leadCtrl.hasValidationError('type')}">
+                                        <label>Type *</label>
+                                        <i class="fancy-arrow-double"></i>
+                                        <select ng-disabled="leadCtrl.checkUserRole()" name="type" class="form-control btn btn-default btn-reveal" ng-model="leadCtrl.lead.type"
+                                            ng-options="status as status for status in leadCtrl.typeList" required>
+                                        </select>
+                                        <span ng-show="leadCtrl.showValidationError('type', 'required')" class="help-block">*Required Field</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-8 col-sm-8">
+                                        <label for="city">City</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="text" name="city" ng-model="leadCtrl.lead.company.city" class="form-control">
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="state">State</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="text" name="state" ng-model="leadCtrl.lead.company.state" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12">
+                                        <label for="description">Description</label>
+                                        <div class="fancy-form">
+                                            <textarea ng-disabled="leadCtrl.checkUserRole()" name="description" ng-model="leadCtrl.lead.description" class="form-control"
+                                                row="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel panel-default -->
+
+                <!-- POINT OF CONTACT -->
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-transparent">
+                        <span>
+                            <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Point of Contact</span>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6" ng-class="{'has-error': leadCtrl.hasValidationError('name')}">
+                                        <label for="name">Name *</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="text" name="name" ng-model="leadCtrl.lead.contact.name" class="form-control"
+                                            required>
+                                        <span ng-show="leadCtrl.showValidationError('name', 'required')" class="help-block">*Required Field</span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4" ng-class="{'has-error': leadCtrl.hasValidationError('phone')}">
+                                        <label>Phone *</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="tel" class="form-control" name="phone" ui-mask="(999) 999-9999" clearOnBlurPlaceholder="false"
+                                            ui-mask-placeholder-char="_" ng-model="leadCtrl.lead.contact.phone" required>
+                                        <span ng-show="leadCtrl.showValidationError('phone', 'required')" class="help-block">*Required Field</span>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <label for="ext">Ext.</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="text" class="form-control size-16" name="phoneExt" ui-mask="?9?9?9?9"
+                                            clearOnBlurPlaceholder="true" ui-mask-placeholder-char=" " ng-model="leadCtrl.lead.contact.ext">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-7 col-sm-7" ng-class="{'has-error': leadCtrl.hasValidationError('email')}">
+                                        <label>Email</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="email" class="form-control" name="email" ng-model="leadCtrl.lead.contact.email">
+                                        <span ng-show="leadCtrl.showValidationError('email', 'type')" class="help-block">*Invalid Email</span>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5">
+                                        <label>Relationship</label>
+                                        <input ng-disabled="leadCtrl.checkUserRole()" type="text" class="form-control" name="relationship" ng-model="leadCtrl.lead.contact.relationship">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel panel-default -->
+
+                <!-- Provider Service Dropdown -->
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-transparent">
+                        <span>
+                            <i class="glyphicon glyphicon-briefcase"></i>&nbsp;&nbsp;Provider Service</span>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <provider-dropdown formReference="leadCtrl.edit" on-select="leadCtrl.currentDropdownId(id)" provider-id="leadCtrl.lead.providerId"></provider-dropdown>
+                            <br>
+                            <br>
+                            <provider-service-dropdown formReference="leadCtrl.edit" provider-id="leadCtrl.lead.providerId" service-id='leadCtrl.currentServiceId(id)'
+                                current-service-id='leadCtrl.lead.serviceId' page-type="'lead'">
+                            </provider-service-dropdown>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+
+                <!-- Submit & Cancel Btns -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-lg-7 col-md-7 col-sm-7">
+                                    <button type="submit" class="btn btn-primary btn-xlg btn-block" ng-disabled="leadCtrl.allowSubmit()">{{leadCtrl.getCurrentModeTxt(true)}}</button>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5">
+                                    <button type="button" class="btn btn-default btn-xlg btn-block" ui-sref="^.list">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Display Notes -->
+            <div class="panel panel-default">
+                <button type="button" class="btn btn-primary pull-right margin-right-10" ng-click="leadCtrl.showNotesTextArea()">New Note</button>
+                <div class="panel-heading panel-heading-transparent">
+                    <span>
+                        <i class="fa fa-sticky-note"></i>&nbsp;&nbsp;Notes &amp; Activity</span>
+                </div>
+                <div class="panel-body">
+                    <form name="leadCtrl.noteForm" ng-submit="leadCtrl.addUpdate()" ng-show="leadCtrl.isVisible">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12">
+                                    <textarea name="notes" ng-show="leadCtrl.isVisible" ng-model="leadCtrl.noteFormInput" rows="2" class="form-control" placeholder="Add an update..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6">
+                                    <button type="button" ng-show="leadCtrl.isVisible" class="btn btn-primary btn-block" ng-click="leadCtrl.addUpdate()">Add Notes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="alert alert-bordered" ng-repeat="item in leadCtrl.leadHistory | orderBy:'date':true">
+                                <h4 class="weight-700">{{item.title}}
+                                    <span class="text-capitalize" ng-show="item.title=='Lead Status Change'">: {{item.content}}</span>
+                                    <br/>
+                                    <span class="size-13 text-default">{{item.date | date:'medium'}}</span>
+                                </h4>
+                                <p ng-show="item.title !== 'Lead Status Change'">{{item.content}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel panel-default -->
+        </div>
+        <!-- /.col-md-6 col-sm-6 -->
+        <!-- END OF MAIN FORM -->
+
+        <!-- Status -->
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-transparent">
+                    <span>
+                        <i class="glyphicon glyphicon-dashboard"></i>&nbsp;&nbsp;Status </span>
+                    <span ng-class="leadCtrl.getStatusColor()">
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
+                                <h4 class="text-center lead-status-text-uppercase well weight-700">
+                                    <span ng-class="leadCtrl.getStatusColor()">
+                                        {{leadCtrl.lead.status}}
+                                    </span>
+                                </h4>
+                                <button name="status" class="form-control btn-3d btn-reveal" ng-click="leadCtrl.open()">
+                                    CHANGE STATUS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel panel-default -->
+
+            <!-- Submitted By / Provider Contact Information -->
+            <div class="panel panel-default" ng-show="leadCtrl.edit">
+                <div class="panel-heading panel-heading-transparent">
+                    <i class="fa fa-user"></i>
+                    &nbsp;
+                    <span>{{leadCtrl.submittedBy.title || 'Submitted By'}}</span>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                        <a class="btn btn-xs btn-default btn-block margin-bottom-10">
+                            <i class="size-15 fa fa-user"></i>
+                            <span class="size-14 bold uppercase text-info">{{leadCtrl.submittedBy.name || 'N/A'}}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
+                        <a class="btn btn-sm btn-3d btn-reveal btn-default btn-block uppercase letter-spacing-1">
+                            <i class="fa fa-comment"></i>
+                            <span>Send a message</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
+                        <a class="btn btn-sm btn-3d btn-reveal btn-default btn-block letter-spacing-1">
+                            <i class="fa fa-phone"></i>
+                            <span>{{leadCtrl.submittedBy.phone || 'N/A'}}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1" ng-hide="leadCtrl.userRole=='User'">
+                        <a class="btn btn-sm btn-3d btn-reveal btn-default btn-block letter-spacing-1 uppercase">
+                            <i class="fa fa-envelope"></i>
+                            <span>{{leadCtrl.submittedBy.email || 'N/A'}}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
+                        <react-directive props="leadCtrl.leadEditProps">
+                        </react-directive>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel panel-default -->
+        </div>
+        <!-- /.col-md-6 col-sm-6 -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /#content .padding-20 -->
+
+
+<!-- modal -->
+<script type="text/ng-template" id="lead-status-change.html">
+
+    <div id="iFrame" class="modal-dialog modal-lg" ng-click="vmModal.cancel()">
+        <iframe ng-src="{{vmModal.url}}" class="iframe-window-to-companies" />
+    </div>
+
+</script>

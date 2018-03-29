@@ -1,0 +1,4 @@
+<select ng-options="lead._id as lead.company.name for lead in $ctrl.leads"
+    ng-change="$ctrl.onSelect({leadId: $ctrl.selectedLeadId})"
+    ng-model="$ctrl.selectedLeadId">
+</select>
